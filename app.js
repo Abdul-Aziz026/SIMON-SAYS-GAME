@@ -1,15 +1,15 @@
 let gameSeq = [];
 let userSeq = [];
 
-let btns=["red", "green", "yellow", "blue"];
+let btns = ["red", "green", "yellow", "blue"];
 
 let started = false;
 let level = 0;
 
 let h2 = document.querySelector("h2");
 
-document.addEventListener("keypress", function() {
-    if (started==false) {
+document.addEventListener("keypress", function () {
+    if (started == false) {
         alert("Game is Started");
         started = true;
 
@@ -19,16 +19,16 @@ document.addEventListener("keypress", function() {
 
 function gameFlash(btn) {
     btn.classList.add("flash");
-    setTimeout(function(){
+    setTimeout(function () {
         btn.classList.remove("flash");
-    }, 250);
+    }, 1000);
 }
 
 function userFlash(btn) {
     btn.classList.add("flash");
-    setTimeout(function(){
+    setTimeout(function () {
         btn.classList.remove("flash");
-    }, 250);
+    }, 100);
 }
 
 function levelUp() {
@@ -37,7 +37,7 @@ function levelUp() {
     h2.innerText = `Level ${level}`;
 
     // random button chose...
-    let randIdx = Math.floor(Math.random()*3);
+    let randIdx = Math.floor(Math.random() * 3);
     let randColor = btns[randIdx];
     let randBtn = document.querySelector(`.${randColor}`);
     gameFlash(randBtn);
@@ -48,17 +48,17 @@ function levelUp() {
 
 
 function checkAns(idx) {
-    if (gameSeq[idx]==userSeq[idx]) {
-        if (userSeq.length == gameSeq.length){
+    if (gameSeq[idx] == userSeq[idx]) {
+        if (userSeq.length == gameSeq.length) {
             setTimeout(levelUp, 1000);
             // levelUp();
         }
     } else {
         h2.innerHTML = `Game Over! Your score was <b>${level}</b> <br> Press any key to restart.`;
-        document.querySelector("body").style.backgroundColor="red";
-        setTimeout(function(){
-            document.querySelector("body").style.backgroundColor="white";
-        }, 150);
+        document.querySelector("body").style.backgroundColor = "red";
+        setTimeout(function () {
+            document.querySelector("body").style.backgroundColor = "white";
+        }, 1000);
         reset();
     }
 }
@@ -70,7 +70,7 @@ function btnPress() {
     userColor = btn.getAttribute("id");
     // console.log(userColor);
     userSeq.push(userColor);
-    checkAns(userSeq.length-1);
+    checkAns(userSeq.length - 1);
 }
 
 let allBtns = document.querySelectorAll(".btn");
